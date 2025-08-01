@@ -15,7 +15,7 @@ class JwtAuthTokenConverter : Converter<Jwt, Mono<AbstractAuthenticationToken>> 
         val converter = JwtAuthenticationConverter()
         converter.setJwtGrantedAuthoritiesConverter { jwt ->
             val roles = jwt.getClaimAsStringList("roles")
-            roles.map { name -> SimpleGrantedAuthority("ROLE_$name") }
+            roles.map(::SimpleGrantedAuthority)
         }
         converter.convert(source)
     }

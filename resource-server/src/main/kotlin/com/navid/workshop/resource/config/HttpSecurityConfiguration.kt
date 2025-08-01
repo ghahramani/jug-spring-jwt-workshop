@@ -15,8 +15,9 @@ class HttpSecurityConfiguration {
         converter: JwtAuthTokenConverter,
     ): SecurityWebFilterChain = http {
         authorizeExchange {
-            authorize("/api/admin", hasRole("ROLE_ENDPOINT_ADMIN"))
-            authorize("/api/user", hasAnyRole("ROLE_ENDPOINT_USER", "ROLE_ENDPOINT_ADMIN"))
+            authorize("/api/admin", hasRole("ENDPOINT_ADMIN"))
+            authorize("/api/user", hasAnyRole("ENDPOINT_USER", "ENDPOINT_ADMIN"))
+            authorize("/actuator/health", permitAll)
             authorize(anyExchange, authenticated)
         }
         oauth2ResourceServer {

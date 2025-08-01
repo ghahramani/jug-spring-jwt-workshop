@@ -6,7 +6,6 @@ logging:
     level: "%5p %mdc [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
   level:
     io.r2dbc.postgresql.client.ReactorNettyClient: info
-
 spring:
   application:
     name: resource-server
@@ -15,3 +14,10 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: https://auth-server.loca.lt/oauth2/jwks
+
+management:
+  endpoint:
+    health:
+      show-details: when_authorized
+      roles:
+        - ROLE_ACTUATOR

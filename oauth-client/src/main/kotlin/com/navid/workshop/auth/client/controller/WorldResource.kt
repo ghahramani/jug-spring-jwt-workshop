@@ -38,6 +38,20 @@ class WorldResource(private val webClient: WebClient) {
             clientResponse.toEntity(String::class.java)
         }
 
+    @GetMapping("/monitoring")
+    fun actuator(
+        @RegisteredOAuth2AuthorizedClient
+        authorizedClient: OAuth2AuthorizedClient
+    ) = webClient
+        .get()
+        .uri("https://auth-user.loca.lt/actuator/health")
+        .attributes { attrs ->
+            attrs[OAuth2AuthorizedClient::class.java.name] = authorizedClient
+        }
+        .exchangeToMono { clientResponse ->
+            clientResponse.toEntity(String::class.java)
+        }
+
     @GetMapping("/me")
     fun me(
         @RegisteredOAuth2AuthorizedClient("navid-oidc")

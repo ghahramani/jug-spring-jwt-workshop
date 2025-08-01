@@ -16,8 +16,10 @@
     <p>Your roles are <span th:text="${T(java.lang.String).join(',', oidcUser.claims['roles'])}"></span></p>
     <p><a href="/admin">Admin Resource</a></p>
     <p><a href="/user">User Resource</a></p>
+    <p><a href="/monitoring">Actuator Resource</a></p>
     <p><a href="/me">Me</a></p>
-    <form th:action="@{/logout}" method="get">
+    <form action="https://auth-server.loca.lt/logout" method="get">
+        <input type="hidden" name="redirect_uri" value="https://auth-client.loca.lt">
         <input type="submit" value="Logout"/>
     </form>
 </div>
