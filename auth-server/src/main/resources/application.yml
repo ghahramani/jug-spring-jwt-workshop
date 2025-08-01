@@ -1,0 +1,27 @@
+server:
+  port: 9000
+
+logging:
+  pattern:
+    level: "%5p %mdc [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    io.r2dbc.postgresql.client.ReactorNettyClient: info
+
+spring:
+  application:
+    name: auth-server
+  security:
+    oauth2:
+      authorizationserver:
+        issuer: https://auth-server.loca.lt
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  session:
+    timeout: 10m
