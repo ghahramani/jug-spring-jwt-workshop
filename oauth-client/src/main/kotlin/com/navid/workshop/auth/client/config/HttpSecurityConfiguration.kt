@@ -54,9 +54,6 @@ class HttpSecurityConfiguration {
             authorize(anyExchange, authenticated)
         }
         oauth2Login { }
-        csrf {
-            disable() // Should not be
-        }
     }
 
     @Bean
